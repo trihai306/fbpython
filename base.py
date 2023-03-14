@@ -4,25 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from selenium import webdriver
 
 TIMEOUT = 10
 
 
 class BasePage:
-    def __init__(self, driver, base_url, proxy=None):
-        if not proxy:
-            self.driver = driver
-        else:
-            capabilities = webdriver.DesiredCapabilities.CHROME.copy()
-            capabilities['proxy'] = webdriver.Proxy({
-                'httpProxy': proxy,
-                'ftpProxy': proxy,
-                'sslProxy': proxy,
-                'proxyType': 'MANUAL'
-            })
-            self.driver = webdriver.Chrome(desired_capabilities=capabilities)
-
+    def __init__(self, driver, base_url):
+        self.driver = driver
         self.base_url = base_url
 
     def open(self, url=''):
